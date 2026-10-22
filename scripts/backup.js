@@ -1,0 +1,3 @@
+const {DatabaseSync,backup}=require('node:sqlite'),fs=require('node:fs'),path=require('node:path');
+async function main(){const dir=process.env.DATA_DIR||path.join(__dirname,'../datos'),destination=path.join(dir,'respaldos');fs.mkdirSync(destination,{recursive:true});const db=new DatabaseSync(path.join(dir,'mesa-lista-v2.sqlite'),{readOnly:true});try{const file=path.join(destination,'mesa-lista-v2-'+new Date().toISOString().replace(/[:.]/g,'-')+'.sqlite');await backup(db,file);console.log('Respaldo consistente guardado en: '+file)}finally{db.close()}}
+main().catch(e=>{console.error(e.message);process.exitCode=1});

@@ -1,0 +1,12 @@
+@echo off
+cd /d "%~dp0"
+where node >nul 2>nul
+if errorlevel 1 (
+ echo Instala Node.js 24 o superior.
+ pause
+ exit /b 1
+)
+echo Mesa Lista - deja esta ventana abierta durante el servicio.
+echo Abre en esta PC la direccion que muestre el servidor.
+node server.js
+pause
